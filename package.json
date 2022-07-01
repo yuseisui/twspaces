@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@enjoyjs/typescript-template",
+  "name": "twspaces",
   "version": "0.1.0",
   "description": "",
   "type": "module",
@@ -12,15 +12,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enjoyjs/typescript-template.git"
+    "url": "git+https://github.com/yuseisui/twspaces.git"
   },
-  "keywords": [],
+  "keywords": [
+    "twitter",
+    "twitter-api",
+    "twitter-spaces"
+  ],
   "author": "Yusei Yamamoto <yuseiyamamoto.dev@outlook.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/enjoyjs/typescript-template/issues"
+    "url": "https://github.com/yuseisui/twspaces/issues"
   },
-  "homepage": "https://github.com/enjoyjs/typescript-template#readme",
+  "homepage": "https://github.com/yuseisui/twspaces#readme",
   "devDependencies": {
     "@enjoyjs/tsconfig": "^4.0.0",
     "@types/xo": "^0.39.3",
