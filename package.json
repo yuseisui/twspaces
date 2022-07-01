@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "@enjoyjs/typescript-template",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "lint": "tsc --noEmit && xo",
+    "lint:fix": "tsc --noEmit && xo --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enjoyjs/typescript-template.git"
+  },
+  "keywords": [],
+  "author": "Yusei Yamamoto <yuseiyamamoto.dev@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enjoyjs/typescript-template/issues"
+  },
+  "homepage": "https://github.com/enjoyjs/typescript-template#readme",
+  "devDependencies": {
+    "@enjoyjs/tsconfig": "^4.0.0",
+    "@types/xo": "^0.39.3",
+    "typescript": "^4.7.4",
+    "xo": "^0.50.0"
+  }
+}
