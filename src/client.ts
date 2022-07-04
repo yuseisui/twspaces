@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ACTIVATE_ENDPOINT, BEARER_TOKEN} from './constants.js';
+import {ACTIVATE_ENDPOINT, BEARER_TOKEN} from './constants';
 import type {ActivateResponse, RequestHeaders} from './types';
 
 export const createClient = () => {
