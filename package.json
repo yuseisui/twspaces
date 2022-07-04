@@ -6,7 +6,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "",
+    "test": "jest",
     "lint": "tsc --noEmit && xo",
     "lint:fix": "tsc --noEmit && xo --fix"
   },
@@ -27,7 +27,13 @@
   "homepage": "https://github.com/yuseisui/twspaces#readme",
   "devDependencies": {
     "@enjoyjs/tsconfig": "^4.0.0",
+    "@jest/globals": "^28.1.2",
+    "@swc/core": "^1.2.208",
+    "@swc/jest": "^0.2.21",
     "@types/xo": "^0.39.3",
+    "eslint-plugin-jest": "^26.5.3",
+    "jest": "^28.1.2",
+    "ts-node": "^10.8.2",
     "typescript": "^4.7.4",
     "xo": "^0.50.0"
   },
