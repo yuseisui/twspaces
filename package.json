@@ -28,7 +28,7 @@
   "devDependencies": {
     "@enjoyjs/tsconfig": "^4.0.0",
     "@jest/globals": "^28.1.2",
-    "@swc/core": "^1.2.208",
+    "@swc/core": "^1.2.210",
     "@swc/jest": "^0.2.21",
     "@types/xo": "^0.39.3",
     "eslint-plugin-jest": "^26.5.3",
