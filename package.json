@@ -4,8 +4,20 @@
   "version": "0.1.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "exports": {
+    "types": "./lib/types/index.d.ts",
+    "node": {
+      "import": "./lib/node/index.js",
+      "require": "./lib/node/index.cjs"
+    },
+    "default": "./lib/browser/index.js"
+  },
+  "main": "./lib/node/index.cjs",
+  "module": "./lib/node/index.js",
+  "browser": "./lib/browser/index.js",
+  "types": "./lib/types/index.d.ts",
   "scripts": {
+    "build": "tsc -p tsconfig.types.json && ts-node esbuild.config.ts",
     "test": "jest",
     "lint": "tsc --noEmit && xo",
     "lint:fix": "tsc --noEmit && xo --fix"
@@ -31,6 +43,7 @@
     "@swc/core": "^1.2.210",
     "@swc/jest": "^0.2.21",
     "@types/xo": "^0.39.3",
+    "esbuild": "^0.14.49",
     "eslint-plugin-jest": "^26.5.3",
     "jest": "^28.1.2",
     "msw": "^0.43.1",
