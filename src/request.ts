@@ -5,7 +5,7 @@ const client = createClient();
 
 export const {request} = client;
 
-export const rest = async <T>(options: RestRequestOptions) => {
+export const rest = async <T>(options: RestRequestOptions): Promise<T> => {
 	const response = await request<T>(options);
 	return response.data;
 };

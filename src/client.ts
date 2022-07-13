@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios, {AxiosInstance} from 'axios';
 import {ACTIVATE_ENDPOINT, BEARER_TOKEN} from './constants';
 import type {ActivateResponse, RequestHeaders} from './types';
 
-export const createClient = () => {
+export const createClient = (): AxiosInstance => {
 	const headers: RequestHeaders = {
 		authorization: BEARER_TOKEN,
 	};
