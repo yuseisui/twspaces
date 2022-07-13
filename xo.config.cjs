@@ -6,4 +6,12 @@ module.exports = {
 		'import/extensions': 'off',
 		'jest/no-hooks': 'off',
 	},
+	overrides: [
+		{
+			files: '**/*.ts',
+			rules: {
+				'@typescript-eslint/explicit-function-return-type': 'error',
+			},
+		},
+	],
 };

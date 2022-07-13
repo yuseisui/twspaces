@@ -3,12 +3,13 @@
 import {AUDIO_SPACE_BY_ID_ENDPOINT} from './constants';
 import {rest} from './request';
 import type {
+	AudioSpace,
 	AudioSpaceByIdResponse,
 	AudioSpaceByIdVariables,
 	Features,
 } from './types';
 
-export const findSpaceById = async (spaceId: string) => {
+export const findSpaceById = async (spaceId: string): Promise<AudioSpace> => {
 	const variables: AudioSpaceByIdVariables = {
 		id: spaceId,
 		isMetatagsQuery: true,
