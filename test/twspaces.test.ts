@@ -49,6 +49,7 @@ describe('twspaces', () => {
 
 	afterEach(() => {
 		server.resetHandlers();
+		audioSpaceById.mockClear();
 	});
 
 	afterAll(() => {
