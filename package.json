@@ -1,8 +1,7 @@
 {
-  "private": true,
   "name": "twspaces",
   "version": "0.1.0",
-  "description": "",
+  "description": "Fetch Twitter Spaces metadata without your tokens",
   "type": "module",
   "exports": {
     "types": "./lib/types/index.d.ts",
@@ -16,6 +15,10 @@
   "module": "./lib/node/index.js",
   "browser": "./lib/browser/index.js",
   "types": "./lib/types/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.types.json && ts-node esbuild.config.ts",
     "test": "jest",
