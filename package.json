@@ -1,6 +1,6 @@
 {
   "name": "twspaces",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Fetch Twitter Spaces metadata without your tokens",
   "type": "module",
   "exports": {
