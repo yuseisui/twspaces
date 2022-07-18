@@ -69,8 +69,8 @@ export type AudioSpaceParticipants = {
 };
 
 export type AudioSpace = {
-	metadata: AudioSpaceMetadata;
-	participants: AudioSpaceParticipants;
+	metadata?: AudioSpaceMetadata;
+	participants?: AudioSpaceParticipants;
 };
 
 export type AudioSpaceByIdResponse = {
