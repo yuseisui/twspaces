@@ -71,7 +71,7 @@ describe('twspaces', () => {
 
 			const response = await findSpaceById('qwertyuiop');
 
-			expect(response.metadata.rest_id).toBe('qwertyuiop');
+			expect(response.metadata?.rest_id).toBe('qwertyuiop');
 		});
 
 		it('receives response with errors', async () => {
