@@ -20,6 +20,22 @@ export type AudioSpaceByIdVariables = {
 	withSuperFollowsUserFields: boolean;
 };
 
+export type TweetDetailVariables = {
+	focalTweetId: string;
+	includePromotedContent: boolean;
+	withBirdwatchNotes: boolean;
+	withCommunity: boolean;
+	withDownvotePerspective: boolean;
+	withQuickPromoteEligibilityTweetFields: boolean;
+	withReactionsMetadata: boolean;
+	withReactionsPerspective: boolean;
+	withSuperFollowsTweetFields: boolean;
+	withSuperFollowsUserFields: boolean;
+	withV2Timeline: boolean;
+	withVoice: boolean;
+	with_rux_injections: boolean;
+};
+
 export type Features = {
 	dont_mention_me_view_api_enabled: boolean;
 	interactive_text_enabled: boolean;
@@ -34,7 +50,7 @@ export type RestRequestOptions = AxiosRequestConfig & {
 	url: string;
 	method: Method;
 	params: {
-		variables: AudioSpaceByIdVariables;
+		variables: AudioSpaceByIdVariables | TweetDetailVariables;
 		features: Features;
 	};
 };
