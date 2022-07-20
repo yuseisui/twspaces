@@ -12,7 +12,7 @@ import {
 import {rest} from 'msw';
 import {setupServer} from 'msw/node';
 import {ACTIVATE_ENDPOINT, AUDIO_SPACE_BY_ID_ENDPOINT} from '../src/constants';
-import {findSpaceById} from '../src/twspaces';
+import {findSpaceById, findSpaceByUrl} from '../src/twspaces';
 import type {ActivateResponse} from '../src/types';
 
 const audioSpaceById = jest.fn();
@@ -28,12 +28,17 @@ const server = setupServer(
 	rest.get(AUDIO_SPACE_BY_ID_ENDPOINT, (request, response, context) => {
 		audioSpaceById(request.headers.get('x-guest-token'));
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const {id}: {id: string} = JSON.parse(
+			request.url.searchParams.get('variables')!,
+		);
+
 		return response(
 			context.json({
 				data: {
 					audioSpace: {
 						metadata: {
-							rest_id: 'qwertyuiop',
+							rest_id: id,
 						},
 					},
 				},
@@ -98,6 +103,18 @@ describe('twspaces', () => {
 			);
 
 			await expect(findSpaceById('qwertyuiop')).rejects.toThrow('Error');
+		});
+	});
+
+	describe('findSpaceByUrl()', () => {
+		it('calls findSpaceById()', async () => {
+			expect.assertions(1);
+
+			const response = await findSpaceByUrl(
+				'https://twitter.com/i/spaces/asdfghjkl',
+			);
+
+			expect(response.metadata?.rest_id).toBe('asdfghjkl');
 		});
 	});
 });
