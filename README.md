@@ -20,6 +20,16 @@ const space = await findSpaceById("<spaceId>");
 console.log(space.metadata);
 ```
 
+### findSpaceByTweetId(tweetId: string): Promise\<[AudioSpace][audiospace]\>
+
+```js
+import { findSpaceByTweetId } from "twspaces";
+
+const space = await findSpaceByTweetId("<tweetId>");
+
+console.log(space.metadata);
+```
+
 ### findSpaceByUrl(url: string): Promise\<[AudioSpace][audiospace]\>
 
 ```js
