@@ -4,7 +4,6 @@ const base: BuildOptions = {
 	entryPoints: ['./src/index.ts'],
 	bundle: true,
 	target: 'es2020',
-	minify: true,
 };
 
 const browser: BuildOptions = {
