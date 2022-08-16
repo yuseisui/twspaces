@@ -92,28 +92,30 @@ export const findSpaceByTweetId = async (
 		},
 	});
 
-	try {
-		const spaceUrl =
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-			response.data.threaded_conversation_with_injections_v2.instructions
-				.find((instruction: any) => {
-					return instruction.type === 'TimelineAddEntries';
-				})
-				.entries.find((entry: any) => {
-					return entry.entryId === `tweet-${tweetId}`;
-				})
-				.content.itemContent.tweet_results.result.legacy.entities.urls.find(
-					(url: any) => {
-						return SPACE_URL_REGEX.test(url.expanded_url);
-					},
-				).expanded_url as string;
-
-		const spaceId = spaceUrl.match(SPACE_URL_REGEX)!.groups!['spaceId']!;
-
-		return await findSpaceById(spaceId);
-	} catch {
-		throw new Error('Cannot find Space by Tweet ID');
+	if (response.errors !== undefined) {
+		throw new Error(response.errors[0]?.message);
 	}
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const url =
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+		response.data.threaded_conversation_with_injections_v2.instructions
+			.find(
+				(instruction: any) => instruction.type === 'TimelineAddEntries',
+			)
+			.entries.find((entry: any) => entry.entryId === `tweet-${tweetId}`)
+			.content.itemContent.tweet_results.result.legacy.entities.urls.find(
+				(url: any) => SPACE_URL_REGEX.test(url.expanded_url),
+			);
+
+	if (url === undefined) {
+		throw new Error('Tweet does not contain Space URL');
+	}
+
+	const spaceUrl = url.expanded_url as string;
+	const spaceId = spaceUrl.match(SPACE_URL_REGEX)!.groups!['spaceId']!;
+
+	return findSpaceById(spaceId);
 };
 
 export const findSpaceByUrl = async (url: string): Promise<AudioSpace> => {
