@@ -48,4 +48,4 @@ const spaceByTweetUrl = await findSpaceByUrl(
 
 [MIT License](LICENSE)
 
-[audiospace]: src/types.ts#L87-L90
+[audiospace]: src/types/response.ts#L8-L11
