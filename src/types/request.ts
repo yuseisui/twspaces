@@ -45,7 +45,7 @@ export type Features = {
 export type RestRequestOptions = AxiosRequestConfig & {
 	url: string;
 	method: Method;
-	params: {
+	params?: {
 		variables: AudioSpaceByIdVariables | TweetDetailVariables;
 		features: Features;
 	};

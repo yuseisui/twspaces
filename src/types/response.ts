@@ -41,3 +41,17 @@ export type AudioSpaceByIdResponse = {
 	};
 	errors?: AudioSpaceByIdResponseError[];
 };
+
+export type LiveStreamMetadata = {
+	source: {
+		location: string;
+		noRedirectPlaybackUrl: string;
+		status: string;
+		streamType: string;
+	};
+	sessionId: string;
+	chatToken: string;
+	lifecycleToken: string;
+	shareUrl: string;
+	chatPermissionType: string;
+};

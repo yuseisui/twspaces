@@ -12,6 +12,7 @@ import type {
 	AudioSpaceByIdResponse,
 	AudioSpaceByIdVariables,
 	Features,
+	LiveStreamMetadata,
 	TweetDetailVariables,
 } from './types';
 
@@ -133,4 +134,15 @@ export const findSpaceByUrl = async (url: string): Promise<AudioSpace> => {
 	}
 
 	throw new Error('Cannot find Space by URL');
+};
+
+export const getLiveStreamMetadata = async (
+	mediaKey: string,
+): Promise<LiveStreamMetadata> => {
+	const response = await rest<LiveStreamMetadata>({
+		url: `https://twitter.com/i/api/1.1/live_video_stream/status/${mediaKey}`,
+		method: 'GET',
+	});
+
+	return response;
 };
