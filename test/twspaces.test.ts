@@ -12,7 +12,11 @@ import {
 import {rest} from 'msw';
 import {setupServer} from 'msw/node';
 import {ACTIVATE_ENDPOINT, AUDIO_SPACE_BY_ID_ENDPOINT} from '../src/constants';
-import {findSpaceById, findSpaceByUrl} from '../src/twspaces';
+import {
+	findSpaceById,
+	findSpaceByUrl,
+	getLiveStreamMetadata,
+} from '../src/twspaces';
 import type {ActivateResponse} from '../src/types';
 
 const audioSpaceById = jest.fn();
@@ -45,6 +49,18 @@ const server = setupServer(
 			}),
 		);
 	}),
+	rest.get(
+		'https://twitter.com/i/api/1.1/live_video_stream/status/1234567890',
+		(_request, response, context) => {
+			return response(
+				context.json({
+					source: {
+						location: 'https://example.com/playlist.m3u8',
+					},
+				}),
+			);
+		},
+	),
 );
 
 describe('twspaces', () => {
@@ -115,6 +131,18 @@ describe('twspaces', () => {
 			);
 
 			expect(response.metadata?.rest_id).toBe('asdfghjkl');
+		});
+	});
+
+	describe('getLiveStreamMetadata()', () => {
+		it('receives response', async () => {
+			expect.assertions(1);
+
+			const response = await getLiveStreamMetadata('1234567890');
+
+			expect(response.source.location).toBe(
+				'https://example.com/playlist.m3u8',
+			);
 		});
 	});
 });
