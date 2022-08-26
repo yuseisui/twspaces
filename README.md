@@ -44,8 +44,23 @@ const spaceByTweetUrl = await findSpaceByUrl(
 );
 ```
 
+### getLiveStreamMetadata(mediaKey: string): Promise\<[LiveStreamMetadata][livestreammetadata]\>
+
+```js
+import { findSpaceById, getLiveStreamMetadata } from "twspaces";
+
+const space = await findSpaceById("<spaceId>");
+
+const liveStreamMetadata = await getLiveStreamMetadata(
+  space.metadata.media_key
+);
+
+console.log(liveStreamMetadata);
+```
+
 ## License
 
 [MIT License](LICENSE)
 
 [audiospace]: src/types/response.ts#L8-L11
+[livestreammetadata]: src/types/response.ts#L45-L57
