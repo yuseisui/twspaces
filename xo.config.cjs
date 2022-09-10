@@ -3,6 +3,8 @@ module.exports = {
 	prettier: true,
 	extends: ['plugin:jest/all'],
 	rules: {
+		// https://github.com/weiran-zsd/eslint-plugin-node/issues/21
+		'n/file-extension-in-import': 'off',
 		'import/extensions': 'off',
 		'jest/no-hooks': 'off',
 	},
