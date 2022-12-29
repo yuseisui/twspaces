@@ -23,6 +23,8 @@ describe('createClient()', () => {
 		createClient();
 
 		expect(axios.create).toHaveBeenCalledTimes(1);
-		expect(axios.create).toHaveBeenCalledWith({headers});
+		expect(axios.create).toHaveBeenCalledWith(
+			expect.objectContaining({headers}),
+		);
 	});
 });
