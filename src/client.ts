@@ -8,7 +8,20 @@ export const createClient = (): AxiosInstance => {
 		authorization: BEARER_TOKEN,
 	};
 
-	const client = axios.create({headers});
+	const client = axios.create({
+		headers,
+		paramsSerializer: {
+			serialize(parameters) {
+				const serializedParameters = new URLSearchParams();
+
+				for (const [name, value] of Object.entries(parameters)) {
+					serializedParameters.set(name, JSON.stringify(value));
+				}
+
+				return serializedParameters.toString();
+			},
+		},
+	});
 
 	const interceptor = client.interceptors.request.use(
 		async (config) => {
