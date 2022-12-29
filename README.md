@@ -62,5 +62,9 @@ console.log(liveStreamMetadata);
 
 [MIT License](LICENSE)
 
+## Related
+
+- [twspaces-dl](https://github.com/yuseisui/twspaces-dl) - CLI app to download Twitter Spaces
+
 [audiospace]: src/types/response.ts#L8-L11
 [livestreammetadata]: src/types/response.ts#L45-L57
