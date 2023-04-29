@@ -2,7 +2,7 @@
   "extends": "@enjoyjs/tsconfig",
   "compilerOptions": {
     "module": "ES2020",
-    "moduleResolution": "Node"
+    "moduleResolution": "bundler"
   },
   "ts-node": {
     "esm": true,
