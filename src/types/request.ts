@@ -1,7 +1,7 @@
 import type {AxiosRequestConfig, Method} from 'axios';
 
 export type RequestHeaders = {
-	authorization: string;
+	Authorization: string;
 	'x-guest-token'?: string;
 };
 

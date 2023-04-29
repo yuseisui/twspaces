@@ -5,7 +5,8 @@ import {BEARER_TOKEN} from '../src/constants';
 import type {RequestHeaders} from '../src/types';
 
 const headers: RequestHeaders = {
-	authorization: BEARER_TOKEN,
+	/* eslint-disable-next-line @typescript-eslint/naming-convention */
+	Authorization: BEARER_TOKEN,
 };
 
 describe('createClient()', () => {

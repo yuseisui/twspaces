@@ -5,7 +5,8 @@ import type {ActivateResponse, RequestHeaders} from './types';
 
 export const createClient = (): AxiosInstance => {
 	const headers: RequestHeaders = {
-		authorization: BEARER_TOKEN,
+		/* eslint-disable-next-line @typescript-eslint/naming-convention */
+		Authorization: BEARER_TOKEN,
 	};
 
 	const client = axios.create({
