@@ -22,14 +22,14 @@ import type {ActivateResponse} from '../src/types';
 const audioSpaceById = jest.fn();
 
 const server = setupServer(
-	rest.post(ACTIVATE_ENDPOINT, (_request, response, context) => {
+	rest.post(ACTIVATE_ENDPOINT, async (_request, response, context) => {
 		return response(
 			context.json<ActivateResponse>({
 				guest_token: '1234567890',
 			}),
 		);
 	}),
-	rest.get(AUDIO_SPACE_BY_ID_ENDPOINT, (request, response, context) => {
+	rest.get(AUDIO_SPACE_BY_ID_ENDPOINT, async (request, response, context) => {
 		audioSpaceById(request.headers.get('x-guest-token'));
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -51,7 +51,7 @@ const server = setupServer(
 	}),
 	rest.get(
 		'https://twitter.com/i/api/1.1/live_video_stream/status/1234567890',
-		(_request, response, context) => {
+		async (_request, response, context) => {
 			return response(
 				context.json({
 					source: {
@@ -101,7 +101,7 @@ describe('twspaces', () => {
 			server.use(
 				rest.get(
 					AUDIO_SPACE_BY_ID_ENDPOINT,
-					(_request, response, context) => {
+					async (_request, response, context) => {
 						return response(
 							context.json({
 								data: {

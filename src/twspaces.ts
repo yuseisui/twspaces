@@ -94,11 +94,11 @@ export const findSpaceByTweetId = async (
 	});
 
 	if (response.errors !== undefined) {
-		throw new Error(response.errors[0]?.message);
+		throw new Error(response.errors[0]?.message as string);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const url =
+	const url: {expanded_url: string} =
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		response.data.threaded_conversation_with_injections_v2.instructions
 			.find(
@@ -106,14 +106,14 @@ export const findSpaceByTweetId = async (
 			)
 			.entries.find((entry: any) => entry.entryId === `tweet-${tweetId}`)
 			.content.itemContent.tweet_results.result.legacy.entities.urls.find(
-				(url: any) => SPACE_URL_REGEX.test(url.expanded_url),
+				(url: any) => SPACE_URL_REGEX.test(url.expanded_url as string),
 			);
 
 	if (url === undefined) {
 		throw new Error('Tweet does not contain Space URL');
 	}
 
-	const spaceUrl = url.expanded_url as string;
+	const spaceUrl = url.expanded_url;
 	const spaceId = spaceUrl.match(SPACE_URL_REGEX)!.groups!['spaceId']!;
 
 	return findSpaceById(spaceId);
