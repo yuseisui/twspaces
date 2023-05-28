@@ -38,14 +38,15 @@ export const findSpaceById = async (spaceId: string): Promise<AudioSpace> => {
 		vibe_tweet_context_enabled: true,
 	};
 
-	const response = await rest<AudioSpaceByIdResponse>({
-		url: AUDIO_SPACE_BY_ID_ENDPOINT,
-		method: 'GET',
-		params: {
-			variables,
-			features,
+	const response = await rest<AudioSpaceByIdResponse>(
+		AUDIO_SPACE_BY_ID_ENDPOINT,
+		{
+			searchParams: new URLSearchParams({
+				variables: JSON.stringify(variables),
+				features: JSON.stringify(features),
+			}),
 		},
-	});
+	);
 
 	if (response.errors !== undefined) {
 		throw new Error(response.errors[0]?.message);
@@ -84,13 +85,11 @@ export const findSpaceByTweetId = async (
 	};
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const response = await rest<any>({
-		url: TWEET_DETAIL_ENDPOINT,
-		method: 'GET',
-		params: {
-			variables,
-			features,
-		},
+	const response = await rest<any>(TWEET_DETAIL_ENDPOINT, {
+		searchParams: new URLSearchParams({
+			variables: JSON.stringify(variables),
+			features: JSON.stringify(features),
+		}),
 	});
 
 	if (response.errors !== undefined) {
@@ -139,10 +138,9 @@ export const findSpaceByUrl = async (url: string): Promise<AudioSpace> => {
 export const getLiveStreamMetadata = async (
 	mediaKey: string,
 ): Promise<LiveStreamMetadata> => {
-	const response = await rest<LiveStreamMetadata>({
-		url: `https://twitter.com/i/api/1.1/live_video_stream/status/${mediaKey}`,
-		method: 'GET',
-	});
+	const response = await rest<LiveStreamMetadata>(
+		`https://twitter.com/i/api/1.1/live_video_stream/status/${mediaKey}`,
+	);
 
 	return response;
 };
