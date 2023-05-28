@@ -1,7 +1,5 @@
-import type {AxiosRequestConfig, Method} from 'axios';
-
 export type RequestHeaders = {
-	Authorization: string;
+	authorization: string;
 	'x-guest-token'?: string;
 };
 
@@ -40,13 +38,4 @@ export type Features = {
 	responsive_web_uc_gql_enabled: boolean;
 	standardized_nudges_misinfo: boolean;
 	vibe_tweet_context_enabled: boolean;
-};
-
-export type RestRequestOptions = AxiosRequestConfig & {
-	url: string;
-	method: Method;
-	params?: {
-		variables: AudioSpaceByIdVariables | TweetDetailVariables;
-		features: Features;
-	};
 };

@@ -1,11 +1,9 @@
+import type {Options} from 'ky';
 import {createClient} from './client';
-import type {RestRequestOptions} from './types';
 
-const client = createClient();
+const request = createClient();
 
-export const {request} = client;
-
-export const rest = async <T>(options: RestRequestOptions): Promise<T> => {
-	const response = await request<T>(options);
-	return response.data;
+export const rest = async <T>(url: string, options?: Options): Promise<T> => {
+	const response = await request(url, options);
+	return response.json<T>();
 };

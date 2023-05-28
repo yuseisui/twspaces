@@ -1,56 +1,35 @@
-import type {AxiosInstance} from 'axios';
-import axios from 'axios';
+import ky from 'ky';
 import {ACTIVATE_ENDPOINT, BEARER_TOKEN} from './constants';
 import type {ActivateResponse, RequestHeaders} from './types';
 
-export const createClient = (): AxiosInstance => {
+export const createClient = (): typeof ky => {
+	const guestTokenHeader: keyof RequestHeaders = 'x-guest-token';
+
 	const headers: RequestHeaders = {
-		/* eslint-disable-next-line @typescript-eslint/naming-convention */
-		Authorization: BEARER_TOKEN,
+		authorization: BEARER_TOKEN,
 	};
 
-	const client = axios.create({
+	const client = ky.create({
 		headers,
-		paramsSerializer: {
-			serialize(parameters) {
-				const serializedParameters = new URLSearchParams();
+		hooks: {
+			beforeRequest: [
+				async (request): Promise<void> => {
+					if (
+						!request.headers.has(guestTokenHeader) &&
+						request.url !== ACTIVATE_ENDPOINT
+					) {
+						/* eslint-disable-next-line @typescript-eslint/naming-convention */
+						const {guest_token} = await client
+							.post(ACTIVATE_ENDPOINT)
+							.json<ActivateResponse>();
 
-				for (const [name, value] of Object.entries(parameters)) {
-					serializedParameters.set(name, JSON.stringify(value));
-				}
-
-				return serializedParameters.toString();
-			},
+						request.headers.set(guestTokenHeader, guest_token);
+						headers[guestTokenHeader] = guest_token;
+					}
+				},
+			],
 		},
 	});
-
-	const interceptor = client.interceptors.request.use(
-		async (config) => {
-			client.interceptors.request.eject(interceptor);
-
-			const response = await client.post<ActivateResponse>(
-				ACTIVATE_ENDPOINT,
-			);
-
-			(client.defaults.headers.common as RequestHeaders)[
-				'x-guest-token'
-			] = response.data.guest_token;
-			(config.headers as RequestHeaders)['x-guest-token'] =
-				response.data.guest_token;
-
-			return config;
-		},
-		undefined,
-		{
-			runWhen(config) {
-				return (
-					(client.defaults.headers.common as RequestHeaders)[
-						'x-guest-token'
-					] === undefined && config.url !== ACTIVATE_ENDPOINT
-				);
-			},
-		},
-	);
 
 	return client;
 };

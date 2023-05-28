@@ -1,29 +1,13 @@
 import type {BuildOptions} from 'esbuild';
 import {build} from 'esbuild';
 
-const base: BuildOptions = {
+const options: BuildOptions = {
 	entryPoints: ['./src/index.ts'],
+	outfile: './lib/index.js',
 	bundle: true,
-	target: 'es2020',
+	target: 'es2021',
+	platform: 'neutral',
+	external: ['ky'],
 };
 
-const browser: BuildOptions = {
-	...base,
-	outfile: './lib/browser/index.js',
-	format: 'esm',
-};
-
-const node: BuildOptions = {
-	...base,
-	outfile: './lib/node/index.cjs',
-	platform: 'node',
-	external: ['axios'],
-};
-
-const nodeEsm: BuildOptions = {
-	...node,
-	outfile: './lib/node/index.js',
-	format: 'esm',
-};
-
-void Promise.all([build(browser), build(node), build(nodeEsm)]);
+void build(options);
