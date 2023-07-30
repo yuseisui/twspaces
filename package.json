@@ -40,7 +40,7 @@
     "url": "https://github.com/yuseisui/twspaces/issues"
   },
   "homepage": "https://github.com/yuseisui/twspaces#readme",
-  "packageManager": "npm@9.8.0",
+  "packageManager": "npm@9.8.1",
   "devDependencies": {
     "@enjoyjs/tsconfig": "^5.0.0",
     "@jest/globals": "^29.6.1",
