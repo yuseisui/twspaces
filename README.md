@@ -2,6 +2,9 @@
 
 Fetch Twitter Spaces metadata without your tokens
 
+> **Warning**
+> This package no longer works due to changes in X (formerly Twitter) API.
+
 ## Install
 
 ```bash
